@@ -26,3 +26,30 @@ public class Rental
     public decimal MileageDriven { get; set; }
     public decimal TotalCost { get; set; }
 }
+
+#SQL
+
+CREATE TABLE Cars (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Model TEXT NOT NULL,
+    HourlyRate REAL NOT NULL,
+    KilometerRate REAL NOT NULL
+);
+
+CREATE TABLE Clients (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    NameSurname TEXT NOT NULL,
+    Email TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE Rentals (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    ClientID INTEGER NOT NULL,
+    CarID INTEGER NOT NULL,
+    StartTime DATETIME NOT NULL,
+    EndTime DATETIME,
+    MileageDriven REAL,
+    TotalCost REAL,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ID),
+    FOREIGN KEY (CarID) REFERENCES Cars(ID)
+);
